@@ -18,12 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dao.prmDBRepo;
+import com.entity.grievanceDB;
 import com.entity.prmDB;
 import com.service.prmService;
 
 @RestController
 @RequestMapping("/prm/grievances")
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("http://localhost:3000")
 public class prmController {
 	
 	@Autowired
@@ -42,14 +43,14 @@ public class prmController {
 	private prmService service;
 		
 	 @GetMapping("/getAll")
-	    public ResponseEntity<List<prmDB>> getAllGrievances() {
-	        List<prmDB> grievances = service.getAllGrievances();
+	    public ResponseEntity<List<grievanceDB>> getAllGrievances() {
+	        List<grievanceDB> grievances = service.getAllGrievances();
 	        return new ResponseEntity<>(grievances, HttpStatus.OK);
 	    }
 	 
 	 @GetMapping("/{id}")
-	    public ResponseEntity<prmDB> getGrievanceById(@PathVariable String grievanceId) {
-	        prmDB grievance = service.getGrievanceById(grievanceId);
+	    public ResponseEntity<grievanceDB> getGrievanceById(@PathVariable String grievanceId) {
+	    	grievanceDB grievance = service.getGrievanceById(grievanceId);
 	        if (grievance != null) {
 	            return new ResponseEntity<>(grievance, HttpStatus.OK);
 	        }

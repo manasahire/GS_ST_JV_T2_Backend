@@ -25,7 +25,7 @@ import com.service.prmService;
 
 @RestController
 @RequestMapping("/hod")
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("http://localhost:3000")
 public class hodController {
 	
 	@Autowired

@@ -1,29 +1,33 @@
 package com.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import com.service.loginService;
+import com.entity.signUp;
+import com.service.loginServiceImpl;
 
 @RestController
 @RequestMapping("/login")
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:3000")
 public class loginController {
-	
-	@Autowired
-	loginService loginservice;
 
-	//LoginValidation
-	  @PostMapping("/zplogin")
-	    public int login(@RequestBody com.entity.login login) {
-	        String username = login.getUsername();
-	        String password = login.getPassword();
-	        String role = login.getRole();
-	        
-		return loginService.loginValidation(username, password,role);
-	  }
+	String result; 
+    @Autowired
+    loginServiceImpl loginservice;
+    
+    @PostMapping("/userlogin")
+    public ResponseEntity<?> login(@RequestParam (name = "username")String  username,@RequestParam (name = "password")String  password ) {
+             
+    	
+        try {
+             result = loginservice.loginValidation(username, password);
+            System.out.println(result);
+            return ResponseEntity.ok(result); // Return HTTP 200 OK with result
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(0);
+            // Return HTTP 500 Internal Server Error with error message
+        }
+    }
 }

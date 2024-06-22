@@ -23,11 +23,13 @@ import com.service.empService;
 
 @RestController
 @RequestMapping("/emp")
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("http://localhost:3000")
 public class empController {
 	
 	@Autowired
 	empDBRepo repo;
+	private empService service;
+
 	
 	@PostMapping("/empData")
 	public ResponseEntity<Map<String, String>>prmData (@RequestBody empDB edb){
@@ -37,9 +39,6 @@ public class empController {
 		return ResponseEntity.ok(response);
 	
 	}
-
-	@Autowired
-	private empService service;
 		
 	 @GetMapping("/getAll")
 	    public ResponseEntity<List<empDB>> getAllGrievances() {
