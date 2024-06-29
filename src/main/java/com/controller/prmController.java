@@ -36,19 +36,20 @@ public class prmController {
 		response.put("message","PRM Data added successfully");
 		 repo.save(pdb);
 		return ResponseEntity.ok(response);
-	
 	}
 	
 	@Autowired
 	private prmService service;
 		
 	 @GetMapping("/getAll")
+	 @CrossOrigin("http://localhost:3000")
 	    public ResponseEntity<List<grievanceDB>> getAllGrievances() {
 	        List<grievanceDB> grievances = service.getAllGrievances();
 	        return new ResponseEntity<>(grievances, HttpStatus.OK);
 	    }
 	 
 	 @GetMapping("/{id}")
+	 @CrossOrigin("http://localhost:3000")
 	    public ResponseEntity<grievanceDB> getGrievanceById(@PathVariable String grievanceId) {
 	    	grievanceDB grievance = service.getGrievanceById(grievanceId);
 	        if (grievance != null) {
@@ -67,6 +68,5 @@ public class prmController {
 	        }
 	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	    }
-	
-
+	    
 }

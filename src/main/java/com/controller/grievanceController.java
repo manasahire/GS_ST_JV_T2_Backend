@@ -25,15 +25,17 @@ public class grievanceController {
 	grievanceDBRepo repo;
 	
 	@PostMapping("/submitGrievance")
+	@CrossOrigin("http://localhost:3000")
 	public ResponseEntity<Map<String, String>> submitGrievance (@RequestBody grievanceDB gdb){
 		Map<String, String> response = new HashMap<>();
 		response.put("message","Grievance added successfully");
 		 repo.save(gdb);
 		return ResponseEntity.ok(response);
 	}
-//	@GetMapping("/getAll")
-//    public ResponseEntity<List<grievanceDB>> getAllGrievances() {
-//        List<grievanceDB> grievances = repo.getAllGrievances();
-//        return new ResponseEntity<>(grievances, HttpStatus.OK);
-//    }
+	@GetMapping("/getAllGrivance")
+	@CrossOrigin("http://localhost:3000")
+    public ResponseEntity<List<grievanceDB>> getAllGrievances() {
+        List<grievanceDB> grievances = repo.findAll();
+        return new ResponseEntity<>(grievances, HttpStatus.OK);
+    }
 }
